@@ -105,10 +105,8 @@ class Graph:
                     print("couldn't add " + str(next_vertex) + ' to ' + new_vertex)
                 elif new_vertex not in self.hashTable_linkedList[next_vertex].vertex_dict or \
                         next_vertex not in self.hashTable_linkedList[new_vertex].vertex_dict:
-                    print(self.hashTable_linkedList[next_vertex].vertex_dict)
                     self.hashTable_linkedList[new_vertex].add_new_node(next_vertex)
                     self.hashTable_linkedList[next_vertex].add_new_node(new_vertex)
-                    print(self.hashTable_linkedList[next_vertex].vertex_dict)
         else:
             print("invalid value, couldn't add " + str(new_vertex) + " to graph")
 
@@ -173,3 +171,7 @@ class Graph:
         for vertex in self.get_vertices():
             hash_table[vertex] = list(self.hashTable_linkedList[vertex].vertex_dict.keys())
         return hash_table
+
+
+
+
