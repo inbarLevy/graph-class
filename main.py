@@ -34,30 +34,28 @@ def create_rand_dict(optional_vertices_list):
     return rand_dict
 
 
-# section 4:
+# create list of random letters
 optional_vertices_list = get_optional_vertices_list()
+
+# crate a dictionary from the list of random letters
 rand_dict = create_rand_dict(optional_vertices_list)
+
+# create a Graph object from the dictionary
 rand_graph = Graph(rand_dict)
 
-# section 4.1:
-print(rand_graph.get_vertices())
-
-# section 4.2:
-print(rand_graph.get_edges())
-
-# section 4.3:
+# add new vertex to the graph
 rand_graph.add_vertex(find_random_letter(), get_rand_vertices_list(optional_vertices_list))
 
-# section 4.4:
-print(rand_graph.get_vertices())
-
-# section 4.5:
+# save the new vertices of the graph
 vertices = rand_graph.get_vertices()
+
+# save the new edges of the graph
 rand_vertex = vertices[random.randint(0, len(vertices) - 1)]
+
+# delete vertex from the graph
 rand_graph.delete_vertex(rand_vertex)
 
-# section 4.6:
-print(rand_graph.get_vertices())
+# Save the new graph to the new_graph.json file
+files_functions.save_data(rand_graph, 'new_graph.json')
 
-# section 4.7:
-files_functions.save_data(rand_graph,'new_graph.json')
+print(Graph.deserialize(rand_dict))

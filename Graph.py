@@ -2,14 +2,12 @@ from LinkedList import LinkedList
 from collections import deque
 
 
-# section A:
 class Graph:
-    # new Complexity Time: O(V+E)
     def __init__(self, dict):
-        self.hashTable_linkedList = Graph.hashTable_to_graph(dict)
+        self.hashTable_linkedList = Graph.deserialize(dict)
 
     @staticmethod
-    def hashTable_to_graph(dict):
+    def deserialize(dict):
         graph = {}
         for vertex in dict.keys():
             if type(vertex) == str:
@@ -27,17 +25,15 @@ class Graph:
                 print("invalid value, couldn't add " + str(vertex) + " to graph")
         return graph
 
-    # section C.7
-    @staticmethod
-    def deserialize(dict):
-        graph = Graph(dict)
-        return graph
+    def serialize(self):
+        hash_table = {}
+        for vertex in self.get_vertices():
+            hash_table[vertex] = list(self.hashTable_linkedList[vertex].vertex_dict.keys())
+        return hash_table
 
-    # section A:
     def get_vertices(self):
         return list(self.hashTable_linkedList.keys())
 
-    # section A:
     def get_edges(self):
         edges = []
         for vertex in self.hashTable_linkedList:
@@ -48,7 +44,6 @@ class Graph:
                 next_vertex = next_vertex.next
         return edges
 
-    # section A:
     def BFS(self, start, goal):
         try:
             x = (start, [start])
@@ -67,7 +62,6 @@ class Graph:
             print("incorrect values, couldn't find path")
             return
 
-    # section C.1
     def delete_vertex(self, unwanted_vertex):
         if unwanted_vertex not in self.hashTable_linkedList:
             print('vertex does not exist in graph')
@@ -94,7 +88,6 @@ class Graph:
                                     vertex_1 = vertex_2
                                     vertex_2 = vertex_2.next
 
-    # section C.2
     def add_vertex(self, new_vertex, new_vertex_list):
         if type(new_vertex) == str:
             if new_vertex not in self.hashTable_linkedList.keys():
@@ -110,7 +103,6 @@ class Graph:
         else:
             print("invalid value, couldn't add " + str(new_vertex) + " to graph")
 
-    # section C.3
     def reverse_path(self, start, goal):
         try:
             x = (start, [start])
@@ -129,7 +121,6 @@ class Graph:
             print("incorrect values, couldn't find path")
             return
 
-    # section C.4
     def shortest_path(self, start, goal):
         results = self.BFS(start, goal)
         if results:
@@ -146,7 +137,6 @@ class Graph:
         elif len(results) == 0:
             print('requested path does not exist')
 
-    # section C.5
     def get_center_from_shortest_path(self, start, goal):
         results = self.shortest_path(start, goal)
         if results:
@@ -165,12 +155,7 @@ class Graph:
                         center_list.append(centers)
                 return center_list
 
-    # section C.6
-    def serialize(self):
-        hash_table = {}
-        for vertex in self.get_vertices():
-            hash_table[vertex] = list(self.hashTable_linkedList[vertex].vertex_dict.keys())
-        return hash_table
+
 
 
 

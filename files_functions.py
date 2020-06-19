@@ -2,7 +2,6 @@ import json
 from Graph import Graph
 
 
-# section B.1:
 def load_data(file_name):
     if file_name.find('.json') == -1:
         str = '.json'
@@ -17,7 +16,6 @@ def load_data(file_name):
     return json_graph
 
 
-# section B.2:
 def save_data(graph, new_file_name):
     if new_file_name.find('.json') == -1:
         str = '.json'
